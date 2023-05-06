@@ -1,0 +1,25 @@
+{
+	"result": {
+		"item": "azure-paxels:iron_paxel"
+	},
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AQ$",
+		" I ",
+		" I "
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:stick"
+		},
+		"$": {
+			"item": "minecraft:iron_axe"
+		},
+		"Q": {
+			"item": "minecraft:iron_shovel"
+		},
+		"A": {
+			"item": "minecraft:iron_pickaxe"
+		}
+	}
+}

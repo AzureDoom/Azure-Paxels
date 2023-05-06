@@ -1,0 +1,25 @@
+{
+	"result": {
+		"item": "azure-paxels:netherite_paxel"
+	},
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AQ$",
+		" I ",
+		" I "
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:stick"
+		},
+		"$": {
+			"item": "minecraft:netherite_axe"
+		},
+		"Q": {
+			"item": "minecraft:netherite_shovel"
+		},
+		"A": {
+			"item": "minecraft:netherite_pickaxe"
+		}
+	}
+}

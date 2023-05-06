@@ -1,0 +1,25 @@
+{
+	"result": {
+		"item": "azure-paxels:diamond_paxel"
+	},
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AQ$",
+		" I ",
+		" I "
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:stick"
+		},
+		"$": {
+			"item": "minecraft:diamond_axe"
+		},
+		"Q": {
+			"item": "minecraft:diamond_shovel"
+		},
+		"A": {
+			"item": "minecraft:diamond_pickaxe"
+		}
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"result": {
+		"item": "azure-paxels:golden_paxel"
+	},
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AQ$",
+		" I ",
+		" I "
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:stick"
+		},
+		"$": {
+			"item": "minecraft:golden_axe"
+		},
+		"Q": {
+			"item": "minecraft:golden_shovel"
+		},
+		"A": {
+			"item": "minecraft:golden_pickaxe"
+		}
+	}
+}
