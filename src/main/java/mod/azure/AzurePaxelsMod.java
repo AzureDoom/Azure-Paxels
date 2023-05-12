@@ -4,10 +4,13 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.level.block.Block;
 
 public class AzurePaxelsMod implements ModInitializer {
 
@@ -18,6 +21,7 @@ public class AzurePaxelsMod implements ModInitializer {
 	public static AzurePaxel GOLDEN_PAXEL;
 	public static AzurePaxel DIAMOND_PAXEL;
 	public static AzurePaxel NETHERITE_PAXEL;
+	public static final TagKey<Block> PAXEL_BLOCKS = TagKey.create(Registries.BLOCK, AzurePaxelsMod.modResource("paxel_blocks"));
 
 	@Override
 	public void onInitialize() {
