@@ -110,7 +110,7 @@ if (file('key.properties').exists()) {
 		uploadFile = remapJar 
 		changelog = rootProject.file("changelog.txt").text
 		gameVersions = ['1.19.4']
-		versionType = "relase"
+		versionType = "release"
 		loaders = ['fabric', 'quilt']
 		dependencies { 
         	required.project "fabric-api"
