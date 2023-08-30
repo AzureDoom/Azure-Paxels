@@ -1,6 +1,6 @@
 {
 	"result": {
-		"item": "azure-paxels:golden_paxel"
+		"item": "azurepaxels:netherite_paxel"
 	},
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
@@ -13,13 +13,13 @@
 			"item": "minecraft:stick"
 		},
 		"$": {
-			"item": "minecraft:golden_axe"
+			"item": "minecraft:netherite_axe"
 		},
 		"Q": {
-			"item": "minecraft:golden_shovel"
+			"item": "minecraft:netherite_shovel"
 		},
 		"A": {
-			"item": "minecraft:golden_pickaxe"
+			"item": "minecraft:netherite_pickaxe"
 		}
 	}
 }

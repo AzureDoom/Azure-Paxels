@@ -1,99 +1,114 @@
-buildscript {
-    repositories {
-    	maven { url  = 'https://plugins.gradle.org/m2/' }
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle' version '[6.0.18,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id "com.modrinth.minotaur" version "2.+"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+}
+
+import com.modrinth.minotaur.dependencies.ModDependency
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = archives_base_name
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file("run/${it.name}")
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        server {
+            property 'forge.enabledGameTestNamespaces', mod_id
+            args '--nogui'
+        }
     }
 }
 
-plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
-	id 'maven-publish'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
-    id "com.modrinth.minotaur" version "2.+"
-}
-import com.modrinth.minotaur.dependencies.ModDependency
-
-version = project.mod_version
-group = project.maven_group
-
-base {
-	archivesName = project.archives_base_name
-}
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
 }
 
-processResources {
-	inputs.property "version", project.version
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
+            neo_version         : neo_version, neo_version_range: neo_version_range,
+            loader_version_range: loader_version_range,
+            mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors         : mod_authors, mod_description: mod_description, pack_format_number: pack_format_number,
+    ]
+    inputs.properties replaceProperties
 
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1', // We are version 1 of ourselves
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+
+    finalizedBy 'reobfJar'
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
-}
-
-java {
-	withSourcesJar()
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
-}
-
-jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
-}
-
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
-		}
-	}
-	repositories {
-	}
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
 if (file('key.properties').exists()) {
     curseforge {
 
-    def curseProp = new Properties()
-    File secretPropsFile = file("key.properties")
-    curseProp.load(secretPropsFile.newInputStream())
+    	def curseProp = new Properties()
+    	File secretPropsFile = file("key.properties")
+    	curseProp.load(secretPropsFile.newInputStream())
 
-    project {
-        apiKey = curseProp.getProperty('curseKey')
-        id = "858703"
-        releaseType = "release"
-        changelogType = 'text'
-        changelog = file('changelog.txt')
-		addGameVersion("1.20.1")
-        addGameVersion("Fabric")
-        addGameVersion("Java 17")
+    	project {
+        	apiKey = curseProp.getProperty('curseKey')
+        	id = "${curse_id}"
+        	releaseType = "${curse_release}"
+        	changelogType = 'text'
+        	changelog = file('CHANGELOG.txt')
+        	addGameVersion("NeoForge")
+        	addGameVersion("Java 17")
 
-        relations {
-            requiredDependency 'fabric-api'      
-        }
-        mainArtifact(remapJar)
-
-        afterEvaluate {
-            uploadTask.dependsOn("remapJar")
-        }
+        	relations {
+            	requiredDependency 'curios'  
+        	}
+    	}
     }
-    options {
-    	//debug = true
-        forgeGradleIntegration = false
-    }
-   }
 }
 
 if (file('key.properties').exists()) {
@@ -103,15 +118,13 @@ if (file('key.properties').exists()) {
 		modrinthProp.load(secretPropsFile.newInputStream())
 		
 		token = modrinthProp.getProperty('modrinthKey')
-		projectId = 'sUlkLN1E' 
+		projectId = project.modrinth_id
 		versionNumber = project.mod_version 
-		uploadFile = remapJar 
+		uploadFile = jar 
 		changelog = rootProject.file("changelog.txt").text
-		gameVersions = ['1.20.1']
-		versionType = "release"
-		loaders = ['fabric', 'quilt']
+		loaders = ['neoforge']
 		dependencies { 
-        	required.project "fabric-api"
+        	required.project "curios"
    		}
 	}
 }

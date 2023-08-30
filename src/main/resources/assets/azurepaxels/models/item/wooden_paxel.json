@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "azure-paxels:item/iron_paxel"
+        "layer0": "azurepaxels:item/wooden_paxel"
     }
 }

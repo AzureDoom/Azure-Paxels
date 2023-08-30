@@ -1,6 +1,6 @@
 {
 	"result": {
-		"item": "azure-paxels:diamond_paxel"
+		"item": "azurepaxels:stone_paxel"
 	},
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
@@ -13,13 +13,13 @@
 			"item": "minecraft:stick"
 		},
 		"$": {
-			"item": "minecraft:diamond_axe"
+			"item": "minecraft:stone_axe"
 		},
 		"Q": {
-			"item": "minecraft:diamond_shovel"
+			"item": "minecraft:stone_shovel"
 		},
 		"A": {
-			"item": "minecraft:diamond_pickaxe"
+			"item": "minecraft:stone_pickaxe"
 		}
 	}
 }
