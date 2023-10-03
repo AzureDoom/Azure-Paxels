@@ -1,3 +1,4 @@
-v1.0.0
+v1.0.1
 
-- NeoForge Port
+- Add German Translation #7 - BoyPika
+- Add Chinese Translation #1 - Enaium
