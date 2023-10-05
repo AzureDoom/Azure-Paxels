@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "azure-paxels",
-	"version": "${version}",
+	"version": "${mod_version}",
 	"name": "Azure Paxels",
 	"description": "Created becasue Fabric 1.19.4 has no good paxel mods updated.",
 	"authors": [
@@ -23,8 +23,8 @@
 		"azure-paxels.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.19",
-		"minecraft": ">=1.20.1",
+		"fabricloader": ">=${loader_version}",
+		"minecraft": ">=${minecraft_version}",
 		"java": ">=17",
 		"fabric-api": "*"
 	}
