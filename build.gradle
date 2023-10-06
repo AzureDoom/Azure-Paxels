@@ -5,11 +5,12 @@ buildscript {
 }
 
 plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'fabric-loom' version '1.4-SNAPSHOT'
 	id 'maven-publish'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
+	id 'net.darkhax.curseforgegradle' version '1.+'
     id "com.modrinth.minotaur" version "2.+"
 }
+
 import com.modrinth.minotaur.dependencies.ModDependency
 
 version = project.mod_version
@@ -19,8 +20,7 @@ base {
 	archivesName = project.archives_base_name
 }
 
-repositories {
-}
+repositories {}
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -49,7 +49,7 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.archivesBaseName}" }
 	}
 }
 
@@ -59,59 +59,44 @@ publishing {
 			from components.java
 		}
 	}
-	repositories {
+	repositories {}
+}
+
+if (file('key.properties').exists()) {
+	task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+		def curseProp = new Properties()
+		File secretPropsFile = file("key.properties")
+		curseProp.load(secretPropsFile.newInputStream())
+
+		apiToken = curseProp.getProperty("curseKey")
+
+		def mainFile = upload("858703", remapJar)
+		mainFile.releaseType = "release"
+		mainFile.changelogType = "text"
+		mainFile.changelog = file("changelog.txt")
+		mainFile.addGameVersion("1.20.2")
+		mainFile.addModLoader("Fabric")
+		mainFile.addJavaVersion("Java 17")
+
+		mainFile.addRequirement "fabric-api"
 	}
-}
 
-if (file('key.properties').exists()) {
-    curseforge {
 
-    def curseProp = new Properties()
-    File secretPropsFile = file("key.properties")
-    curseProp.load(secretPropsFile.newInputStream())
-
-    project {
-        apiKey = curseProp.getProperty('curseKey')
-        id = "858703"
-        releaseType = "release"
-        changelogType = 'text'
-        changelog = file('changelog.txt')
-		addGameVersion("1.20.2")
-        addGameVersion("Fabric")
-        addGameVersion("Java 17")
-
-        relations {
-            requiredDependency 'fabric-api'      
-        }
-        mainArtifact(remapJar)
-
-        afterEvaluate {
-            uploadTask.dependsOn("remapJar")
-        }
-    }
-    options {
-    	//debug = true
-        forgeGradleIntegration = false
-    }
-   }
-}
-
-if (file('key.properties').exists()) {
 	modrinth {
 		def modrinthProp = new Properties()
 		File secretPropsFile = file("key.properties")
 		modrinthProp.load(secretPropsFile.newInputStream())
-		
+
 		token = modrinthProp.getProperty('modrinthKey')
-		projectId = 'sUlkLN1E' 
-		versionNumber = project.mod_version 
-		uploadFile = remapJar 
+		projectId = 'sUlkLN1E'
+		versionNumber = project.mod_version
+		uploadFile = remapJar
 		changelog = rootProject.file("changelog.txt").text
 		gameVersions = ['1.20.2']
 		versionType = "release"
 		loaders = ['fabric', 'quilt']
-		dependencies { 
-        	required.project "fabric-api"
-   		}
+		dependencies {
+			required.project "fabric-api"
+		}
 	}
 }
