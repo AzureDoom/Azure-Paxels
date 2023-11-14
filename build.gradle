@@ -82,8 +82,9 @@ if (file('key.properties').exists()) {
 
 		mainFile.addRequirement "fabric-api"
 	}
+}
 
-
+if (file('key.properties').exists()) {
 	modrinth {
 		def modrinthProp = new Properties()
 		File secretPropsFile = file("key.properties")
