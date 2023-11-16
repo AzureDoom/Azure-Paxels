@@ -69,5 +69,4 @@ public class AzurePaxel extends DiggerItem {
 		}
 		return InteractionResult.SUCCESS;
 	}
-
 }

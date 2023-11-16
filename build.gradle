@@ -76,6 +76,7 @@ if (file('key.properties').exists()) {
 		mainFile.releaseType = "release"
 		mainFile.changelogType = "text"
 		mainFile.changelog = file("changelog.txt")
+		mainFile.addGameVersion("1.20.1")
 		mainFile.addGameVersion("1.20.2")
 		mainFile.addModLoader("Fabric")
 		mainFile.addJavaVersion("Java 17")
@@ -95,7 +96,7 @@ if (file('key.properties').exists()) {
 		versionNumber = project.mod_version
 		uploadFile = remapJar
 		changelog = rootProject.file("changelog.txt").text
-		gameVersions = ['1.20.2']
+		gameVersions = ["1.20.1", "1.20.2"]
 		versionType = "release"
 		loaders = ['fabric', 'quilt']
 		dependencies {
