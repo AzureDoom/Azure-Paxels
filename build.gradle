@@ -55,10 +55,15 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven {
+        name = 'Sponge / Mixin'
+        url = 'https://repo.spongepowered.org/repository/maven-public/'
+    }
 }
 
 dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -110,6 +115,7 @@ if (file('key.properties').exists()) {
         	changelogType = 'text'
         	changelog = file('CHANGELOG.txt')
         	addGameVersion("NeoForge")
+            addGameVersion("Forge")
         	addGameVersion("Java 17")
 
         	relations {
@@ -130,7 +136,7 @@ if (file('key.properties').exists()) {
 		versionNumber = project.mod_version 
 		uploadFile = jar 
 		changelog = rootProject.file("changelog.txt").text
-		loaders = ['neoforge']
+		loaders = ['neoforge', 'forge']
 		dependencies { 
         	required.project "curios"
    		}
