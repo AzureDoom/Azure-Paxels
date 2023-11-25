@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "mod.azure.mixins",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "azurepaxels.refmap.json",
+	"mixins": [
+		"DamageEnchantmentMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

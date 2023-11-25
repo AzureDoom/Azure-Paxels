@@ -17,6 +17,12 @@ base {
     archivesName = archives_base_name
 }
 
+mixin {
+    add(sourceSets.main, "azurepaxels.refmap.json")
+
+    config("azurepaxels.mixins.json")
+}
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -26,6 +32,8 @@ minecraft {
     runs {
         configureEach {
             workingDirectory project.file("run/${it.name}")
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 "${mod_id}" {
                     source sourceSets.main
