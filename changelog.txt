@@ -1,3 +1,4 @@
-v1.0.2
+v1.0.3
 
-- Adds missing tags for tools.
+- Fixes broken tags due to fabric vs neoforge namespace issues. Will be fixed with multiloader move in 1.20.2
+- Fixes Paxel not being enchantable with sword enchantments
