@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class AzurePaxel extends DiggerItem {
 
@@ -21,16 +21,16 @@ public class AzurePaxel extends DiggerItem {
     protected static final Map<Block, Block> BLOCK_STRIPPING_MAP = Axe.getStrippables();
 
     public AzurePaxel(Tier tier, Float damage) {
-        super(damage, -2.8f, tier, CommonMod.PAXEL_BLOCKS, new Item.Properties().stacksTo(1));
+        super(tier, CommonMod.PAXEL_BLOCKS, new Item.Properties().stacksTo(1));
     }
 
     @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
+    public float getDestroySpeed(@NotNull ItemStack stack, @NotNull BlockState state) {
         return 30;
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public @NotNull InteractionResult useOn(UseOnContext context) {
         final var world = context.getLevel();
         final var blockPos = context.getClickedPos();
         final var player = context.getPlayer();
@@ -46,14 +46,14 @@ public class AzurePaxel extends DiggerItem {
             if (foundResult != null && world.getBlockState(blockPos.above()).isAir()) {
                 world.playSound(player, blockPos, SoundEvents.SHOVEL_FLATTEN, SoundSource.BLOCKS, 1.0F, 1.0F);
                 resultToSet = foundResult;
-            } else if (blockstate.getBlock() instanceof CampfireBlock && blockstate.getValue(CampfireBlock.LIT))
+            } else if (blockstate.getBlock() instanceof CampfireBlock && Boolean.TRUE.equals(blockstate.getValue(CampfireBlock.LIT)))
                 resultToSet = blockstate.setValue(CampfireBlock.LIT, false);
         }
         if (resultToSet == null) return InteractionResult.PASS;
         if (!world.isClientSide()) {
             world.setBlock(blockPos, resultToSet, 11);
-            if (player != null) context.getItemInHand().hurtAndBreak(1, (LivingEntity) player,
-                    (Consumer<LivingEntity>) p -> p.broadcastBreakEvent(context.getHand()));
+            if (player != null) context.getItemInHand().hurtAndBreak(1, player,
+                    LivingEntity.getSlotForHand(context.getHand()));
         }
         return InteractionResult.SUCCESS;
     }
@@ -63,8 +63,8 @@ public class AzurePaxel extends DiggerItem {
             return AxeItem.STRIPPABLES;
         }
 
-        private Axe(Tier tier, float f, float g, Properties properties) {
-            super(tier, f, g, properties);
+        private Axe(Tier tier, Properties properties) {
+            super(tier, properties);
         }
     }
 
@@ -73,8 +73,8 @@ public class AzurePaxel extends DiggerItem {
             return ShovelItem.FLATTENABLES;
         }
 
-        private Shovel(Tier tier, float f, float g, Properties properties) {
-            super(tier, f, g, properties);
+        private Shovel(Tier tier, Properties properties) {
+            super(tier, properties);
         }
     }
 

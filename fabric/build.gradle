@@ -1,20 +1,7 @@
 plugins {
-    id 'java'
-    id 'idea'
-    id 'maven-publish'
-    id 'fabric-loom'
-    id "me.modmuss50.mod-publish-plugin"
-}
-
-base {
-    archivesName = "${mod_id}-fabric-${minecraft_version}"
-}
-
-repositories {
-    mavenCentral()
-    maven { url 'https://api.modrinth.com/maven' }
-    maven { url "https://cfa2.cursemaven.com" }
-    maven { url "https://plugins.gradle.org/m2/" }
+    id 'multiloader-loader'
+    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'me.modmuss50.mod-publish-plugin' version "${modmuss50_mod_publish_version}"
 }
 
 dependencies {
@@ -22,12 +9,12 @@ dependencies {
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
-    compileOnly project(":common")
 }
 
 loom {
-    if (project(":common").file("src/main/resources/${mod_id}.aw").exists()) {
-        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.aw"))
+    def aw = project(":common").file("src/main/resources/${mod_id}.accesswidener")
+    if (aw.exists()) {
+        accessWidenerPath.set(aw)
     }
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")
@@ -37,34 +24,15 @@ loom {
             client()
             setConfigName("Fabric Client")
             ideConfigGenerated(true)
-            runDir("runClient")
+            runDir("runs/client")
         }
         server {
             server()
             setConfigName("Fabric Server")
             ideConfigGenerated(true)
-            runDir("runServer")
+            runDir("runs/server")
         }
     }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    source(project(":common").sourceSets.main.allSource)
-}
-
-processResources {
-    from project(":common").sourceSets.main.resources
-}
-
-// TODO: Everything below here might be fine to move to the top-level build.gradle file.
-// They were originally in the previous fabric build.gradle. - bvanseg
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release = 17
-}
-
-jar {
-    from "LICENSE"
 }
 
 if (file('key.properties').exists()) {
@@ -73,10 +41,9 @@ if (file('key.properties').exists()) {
         File secretPropsFile = file("key.properties")
         releaseProp.load(secretPropsFile.newInputStream())
         file = remapJar.archiveFile
-        changelog = rootProject.file("changelog.txt").text
+        changelog = rootProject.file("changelog.md").text
         type = STABLE
         modLoaders.add("fabric")
-        modLoaders.add("quilt")
 
         curseforge {
             projectId = project.curseforgeID

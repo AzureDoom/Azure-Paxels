@@ -1,6 +1,6 @@
 {
 	"result": {
-		"item": "azurepaxels:wooden_paxel"
+		"id": "azurepaxels:wooden_paxel"
 	},
 	"type": "minecraft:crafting_shaped",
 	"pattern": [

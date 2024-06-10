@@ -1,6 +1,6 @@
 {
 	"result": {
-		"item": "azurepaxels:netherite_paxel"
+		"id": "azurepaxels:netherite_paxel"
 	},
 	"type": "minecraft:crafting_shaped",
 	"pattern": [

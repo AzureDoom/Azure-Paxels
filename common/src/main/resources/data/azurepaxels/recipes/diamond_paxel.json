@@ -1,6 +1,6 @@
 {
 	"result": {
-		"item": "azurepaxels:diamond_paxel"
+		"id": "azurepaxels:diamond_paxel"
 	},
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
