@@ -1,3 +1,3 @@
-v1.0.1
+v1.0.2
 
-- Added ru lang thanks to mpustovoi
+- Updated to 1.21!
