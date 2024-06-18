@@ -17,7 +17,7 @@ public class CommonMod {
     public static final Item DIAMOND_PAXEL = new AzurePaxel(Tiers.DIAMOND, 6.0f);
     public static final Item NETHERITE_PAXEL = new AzurePaxel(Tiers.NETHERITE, 6.0f);
 
-    public static final ResourceLocation modResource(String name) {
-        return new ResourceLocation(MOD_ID, name);
+    public static ResourceLocation modResource(String name) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
 }
