@@ -1,3 +1,3 @@
-v1.0.2
+v1.0.3
 
-- Updated to 1.21!
+- Fixes recipes due to Mojang change of datapacks of recipes -> recipe 
