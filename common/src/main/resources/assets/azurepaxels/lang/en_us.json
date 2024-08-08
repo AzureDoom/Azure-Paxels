@@ -4,5 +4,17 @@
 	"item.azurepaxels.iron_paxel": "Iron Paxel",
 	"item.azurepaxels.golden_paxel": "Golden Paxel",
 	"item.azurepaxels.diamond_paxel": "Diamond Paxel",
-	"item.azurepaxels.netherite_paxel": "Netherite Paxel"
+	"item.azurepaxels.netherite_paxel": "Netherite Paxel",
+	"config.azurepaxels.option.paxel_wood_minespeed": "Wooden Paxel Mining Speed",
+	"config.azurepaxels.option.paxel_stone_minespeed": "Stone Paxel Mining Speed",
+	"config.azurepaxels.option.paxel_iron_minespeed": "Iron Paxel Mining Speed",
+	"config.azurepaxels.option.paxel_gold_minespeed": "Gold Paxel Mining Speed",
+	"config.azurepaxels.option.paxel_diamond_minespeed": "Diamond Paxel Mining Speed",
+	"config.azurepaxels.option.paxel_netherrite_minespeed": "Netherite Paxel Mining Speed",
+	"config.azurepaxels.option.paxel_wood_durability": "Wooden Paxel Durability",
+	"config.azurepaxels.option.paxel_stone_durability": "Stone Paxel Durability",
+	"config.azurepaxels.option.paxel_iron_durability": "Iron Paxel Durability",
+	"config.azurepaxels.option.paxel_gold_durability": "Gold Paxel Durability",
+	"config.azurepaxels.option.paxel_diamond_durability": "Diamond Paxel Durability",
+	"config.azurepaxels.option.paxel_netherrite_durability": "Netherite Paxel Durability"
 }

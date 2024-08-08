@@ -15,18 +15,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-public class AzurePaxel extends DiggerItem {
+public abstract class AzurePaxel extends DiggerItem {
 
     protected static final Map<Block, BlockState> SHOVEL_LOOKUP = Shovel.getFlattenables();
     protected static final Map<Block, Block> BLOCK_STRIPPING_MAP = Axe.getStrippables();
 
-    public AzurePaxel(Tier tier, Float damage) {
-        super(tier, CommonMod.PAXEL_BLOCKS, new Item.Properties().stacksTo(1));
-    }
-
-    @Override
-    public float getDestroySpeed(@NotNull ItemStack stack, @NotNull BlockState state) {
-        return 30;
+    public AzurePaxel(Tier tier, Float damage, int durability) {
+        super(tier, CommonMod.PAXEL_BLOCKS, new Item.Properties().durability(durability).stacksTo(1));
     }
 
     @Override

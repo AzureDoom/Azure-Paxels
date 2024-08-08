@@ -1,5 +1,8 @@
 package mod.azure.azurepaxels;
 
+import mod.azure.azurelib.common.internal.common.AzureLibMod;
+import mod.azure.azurelib.common.internal.common.config.format.ConfigFormats;
+import mod.azure.azurepaxels.config.PaxelConfig;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -30,6 +33,7 @@ public final class NeoForgeMod {
 
     public NeoForgeMod(IEventBus modEventBus) {
         ITEM_DEFERRED_REGISTER.register(modEventBus);
+        CommonMod.config = AzureLibMod.registerConfig(PaxelConfig.class, ConfigFormats.json()).getConfigInstance();
         modEventBus.addListener(this::addCreativeTabs);
     }
 

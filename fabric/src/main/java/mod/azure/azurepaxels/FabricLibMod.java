@@ -1,5 +1,8 @@
 package mod.azure.azurepaxels;
 
+import mod.azure.azurelib.common.internal.common.AzureLibMod;
+import mod.azure.azurelib.common.internal.common.config.format.ConfigFormats;
+import mod.azure.azurepaxels.config.PaxelConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
@@ -10,6 +13,7 @@ public final class FabricLibMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        CommonMod.init();
         Registry.register(BuiltInRegistries.ITEM, CommonMod.modResource("wooden_paxel"), CommonMod.WOODEN_PAXEL);
         Registry.register(BuiltInRegistries.ITEM, CommonMod.modResource("stone_paxel"), CommonMod.STONE_PAXEL);
         Registry.register(BuiltInRegistries.ITEM, CommonMod.modResource("iron_paxel"), CommonMod.IRON_PAXEL);
