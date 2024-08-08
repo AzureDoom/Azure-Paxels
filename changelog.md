@@ -1,3 +1,4 @@
-v1.0.3
+v1.0.4
 
-- Fixes recipes due to Mojang change of datapacks of recipes -> recipe 
+- Adds Configuration for per type speed/durability (now requires AzureLib)
+- 1.21.1 update
