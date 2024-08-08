@@ -45,6 +45,7 @@ repositories {
 }
 
 dependencies {
+    implementation "mod.azure.azurelib:azurelib-neo-${minecraft_version}:${azurelib_version}"
 }
 
 if (file('key.properties').exists()) {
@@ -62,11 +63,17 @@ if (file('key.properties').exists()) {
             projectSlug = project.projectSlug
             accessToken = releaseProp.getProperty("curseKey")
             minecraftVersions.add("${minecraft_version}")
+            requires {
+                slug = "azurelib"
+            }
         }
         modrinth {
             projectId = project.modrinthID
             accessToken = releaseProp.getProperty('modrinthKey')
             minecraftVersions.add("${minecraft_version}")
+            requires {
+                slug = "azurelib"
+            }
         }
     }
 }
