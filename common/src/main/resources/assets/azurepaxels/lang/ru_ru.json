@@ -1,8 +1,20 @@
 {
-	"item.azurepaxels.wooden_paxel": "Деревянный мультиинструмент",
-	"item.azurepaxels.stone_paxel": "Каменный мультиинструмент",
-	"item.azurepaxels.iron_paxel": "Железный мультиинструмент",
-	"item.azurepaxels.golden_paxel": "Золотой мультиинструмент",
-	"item.azurepaxels.diamond_paxel": "Алмазный мультиинструмент",
-	"item.azurepaxels.netherite_paxel": "Незеритовый мультиинструмент"
+  "item.azurepaxels.wooden_paxel": "Деревянный мультиинструмент",
+  "item.azurepaxels.stone_paxel": "Каменный мультиинструмент",
+  "item.azurepaxels.iron_paxel": "Железный мультиинструмент",
+  "item.azurepaxels.golden_paxel": "Золотой мультиинструмент",
+  "item.azurepaxels.diamond_paxel": "Алмазный мультиинструмент",
+  "item.azurepaxels.netherite_paxel": "Незеритовый мультиинструмент",
+  "config.azurepaxels.option.paxel_wood_minespeed": "Скорость добычи деревянного мультиинструмента",
+  "config.azurepaxels.option.paxel_stone_minespeed": "Скорость добычи каменного мультиинструмента",
+  "config.azurepaxels.option.paxel_iron_minespeed": "Скорость добычи железного мультиинструмента",
+  "config.azurepaxels.option.paxel_gold_minespeed": "Скорость добычи золотого мультиинструмента",
+  "config.azurepaxels.option.paxel_diamond_minespeed": "Скорость добычи алмазного мультиинструмента",
+  "config.azurepaxels.option.paxel_netherrite_minespeed": "Скорость добычи незеритового мультиинструмента",
+  "config.azurepaxels.option.paxel_wood_durability": "Прочность деревянного мультиинструмента",
+  "config.azurepaxels.option.paxel_stone_durability": "Прочность каменного мультиинструмента",
+  "config.azurepaxels.option.paxel_iron_durability": "Прочность железного мультиинструмента",
+  "config.azurepaxels.option.paxel_gold_durability": "Прочность золотого мультиинструмента",
+  "config.azurepaxels.option.paxel_diamond_durability": "Прочность алмазного мультиинструмента",
+  "config.azurepaxels.option.paxel_netherrite_durability": "Прочность незеритового мультиинструмента"
 }
